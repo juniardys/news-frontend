@@ -1,17 +1,16 @@
-function App() {
+import HomePage from "@/pages/Home";
+import LoginPage from "@/pages/Login";
+import RegisterPage from "@/pages/Register";
+import { Route, Routes } from "react-router-dom";
+
+const App = () => {
   return (
-    <div className="App">
-      <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4">
-        <div className="shrink-0">
-          <img className="h-12 w-12" src="/logo512.png" alt="ChitChat Logo" />
-        </div>
-        <div>
-          <div className="text-xl font-medium text-black">ChitChat</div>
-          <p className="text-slate-500">You have a new message!</p>
-        </div>
-      </div>
-    </div>
-  );
+    <Routes>
+      <Route path="/" element={<HomePage/>}/>
+      <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/register" element={<RegisterPage/>}/>
+    </Routes>
+  )
 }
 
 export default App;
