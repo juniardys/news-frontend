@@ -1,8 +1,64 @@
+import Loader from "@/components/common/Loader";
 import Navbar from "@/components/common/Navbar";
+import { authAPI } from "@/features/auth/authAPI";
+import { selectCurentUser, setCredentials } from "@/features/auth/authSlice";
+import { setLoaderLoading } from "@/features/loader/loaderSlice";
 import { Button, Label, TextInput } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
+    const user = useSelector(selectCurentUser);
+
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+    })
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    }, [])
+
+    const onChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }))
+    }
+
+    const doRegister = async () => {
+        dispatch(setLoaderLoading(true))
+        await authAPI.register(formData)
+            .then((response) => {
+                if (response?.data && response?.data?.token && response?.data?.user) {
+                    const token = response?.data?.token;
+                    const user = response?.data?.user;
+
+                    dispatch(setCredentials({ user, token }))
+                    navigate('/preferences')
+                    toast.success('Successfully registered!')
+                }
+            })
+            .catch((error) => {
+                const response = error.response?.data;
+                if (response?.message) {
+                    toast.error(response?.message);
+                }
+            })
+            .finally(() => {
+                dispatch(setLoaderLoading(false))
+            })
+    }
+
     return (
         <>
             <Navbar />
@@ -24,7 +80,9 @@ const RegisterPage = () => {
                                     <TextInput
                                         id="name"
                                         type="text"
+                                        name="name"
                                         placeholder="your name"
+                                        onChange={onChange}
                                         required={true}
                                     />
                                 </div>
@@ -38,7 +96,9 @@ const RegisterPage = () => {
                                     <TextInput
                                         id="email"
                                         type="email"
+                                        name="email"
                                         placeholder="name@example.com"
+                                        onChange={onChange}
                                         required={true}
                                     />
                                 </div>
@@ -52,7 +112,9 @@ const RegisterPage = () => {
                                     <TextInput
                                         id="password"
                                         type="password"
+                                        name="password"
                                         placeholder="••••••••"
+                                        onChange={onChange}
                                         required={true}
                                     />
                                 </div>
@@ -66,11 +128,17 @@ const RegisterPage = () => {
                                     <TextInput
                                         id="password_confirmation"
                                         type="password"
+                                        name="password_confirmation"
                                         placeholder="••••••••"
+                                        onChange={onChange}
                                         required={true}
                                     />
                                 </div>
-                                <Button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                <Button
+                                    type="button"
+                                    className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                    onClick={doRegister}
+                                >
                                     Sign Up
                                 </Button>
                                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
