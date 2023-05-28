@@ -1,120 +1,134 @@
 import Navbar from "@/components/common/Navbar";
+import { selectCurentUser } from "@/features/auth/authSlice";
 import { Button, Checkbox, Label } from "flowbite-react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 const PreferencesPage = () => {
+    const user = useSelector(selectCurentUser);
+
     const [listItems, setListItems] = useState([]);
 
     const [selectedSources, setSelectedSources] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedAuthors, setSelectedAuthors] = useState([]);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
-        setListItems([
-            { label: 'Afghanistan', value: 'AF' },
-            { label: 'Åland Islands', value: 'AX' },
-            { label: 'Albania', value: 'AL' },
-            { label: 'Algeria', value: 'DZ' },
-            { label: 'American Samoa', value: 'AS' },
-            { label: 'AndorrA', value: 'AD' },
-            { label: 'Angola', value: 'AO' },
-            { label: 'Anguilla', value: 'AI' },
-            { label: 'Antarctica', value: 'AQ' },
-            { label: 'Antigua and Barbuda', value: 'AG' },
-            { label: 'Argentina', value: 'AR' },
-            { label: 'Armenia', value: 'AM' },
-            { label: 'Aruba', value: 'AW' },
-            { label: 'Australia', value: 'AU' },
-            { label: 'Austria', value: 'AT' },
-            { label: 'Azerbaijan', value: 'AZ' },
-            { label: 'Bahamas', value: 'BS' },
-            { label: 'Bahrain', value: 'BH' },
-            { label: 'Bangladesh', value: 'BD' },
-            { label: 'Barbados', value: 'BB' },
-            { label: 'Belarus', value: 'BY' },
-            { label: 'Belgium', value: 'BE' },
-            { label: 'Belize', value: 'BZ' },
-            { label: 'Benin', value: 'BJ' },
-            { label: 'Bermuda', value: 'BM' },
-            { label: 'Bhutan', value: 'BT' },
-            { label: 'Bolivia', value: 'BO' },
-            { label: 'Bosnia and Herzegovina', value: 'BA' },
-            { label: 'Botswana', value: 'BW' },
-            { label: 'Bouvet Island', value: 'BV' },
-            { label: 'Brazil', value: 'BR' },
-            { label: 'British Indian Ocean Territory', value: 'IO' },
-            { label: 'Brunei Darussalam', value: 'BN' },
-            { label: 'Bulgaria', value: 'BG' },
-            { label: 'Burkina Faso', value: 'BF' },
-            { label: 'Burundi', value: 'BI' },
-            { label: 'Cambodia', value: 'KH' },
-            { label: 'Cameroon', value: 'CM' },
-            { label: 'Canada', value: 'CA' },
-            { label: 'Cape Verde', value: 'CV' },
-            { label: 'Cayman Islands', value: 'KY' },
-            { label: 'Central African Republic', value: 'CF' },
-            { label: 'Chad', value: 'TD' },
-            { label: 'Chile', value: 'CL' },
-            { label: 'China', value: 'CN' },
-            { label: 'Christmas Island', value: 'CX' },
-            { label: 'Cocos (Keeling) Islands', value: 'CC' },
-            { label: 'Colombia', value: 'CO' },
-            { label: 'Comoros', value: 'KM' },
-            { label: 'Congo', value: 'CG' },
-            { label: 'Congo, The Democratic Republic of the', value: 'CD' },
-            { label: 'Cook Islands', value: 'CK' },
-            { label: 'Costa Rica', value: 'CR' },
-            { label: 'Cote D\'Ivoire', value: 'CI' },
-            { label: 'Croatia', value: 'HR' },
-            { label: 'Cuba', value: 'CU' },
-            { label: 'Cyprus', value: 'CY' },
-            { label: 'Czech Republic', value: 'CZ' },
-            { label: 'Denmark', value: 'DK' },
-            { label: 'Djibouti', value: 'DJ' },
-            { label: 'Dominica', value: 'DM' },
-            { label: 'Dominican Republic', value: 'DO' },
-            { label: 'Ecuador', value: 'EC' },
-            { label: 'Egypt', value: 'EG' },
-            { label: 'El Salvador', value: 'SV' },
-            { label: 'Equatorial Guinea', value: 'GQ' },
-            { label: 'Eritrea', value: 'ER' },
-            { label: 'Estonia', value: 'EE' },
-            { label: 'Ethiopia', value: 'ET' },
-            { label: 'Falkland Islands (Malvinas)', value: 'FK' },
-            { label: 'Faroe Islands', value: 'FO' },
-            { label: 'Fiji', value: 'FJ' },
-            { label: 'Finland', value: 'FI' },
-            { label: 'France', value: 'FR' },
-            { label: 'French Guiana', value: 'GF' },
-            { label: 'French Polynesia', value: 'PF' },
-            { label: 'French Southern Territories', value: 'TF' },
-            { label: 'Gabon', value: 'GA' },
-            { label: 'Gambia', value: 'GM' },
-            { label: 'Georgia', value: 'GE' },
-            { label: 'Germany', value: 'DE' },
-            { label: 'Ghana', value: 'GH' },
-            { label: 'Gibraltar', value: 'GI' },
-            { label: 'Greece', value: 'GR' },
-            { label: 'Greenland', value: 'GL' },
-            { label: 'Grenada', value: 'GD' },
-            { label: 'Guadeloupe', value: 'GP' },
-            { label: 'Guam', value: 'GU' },
-            { label: 'Guatemala', value: 'GT' },
-            { label: 'Guernsey', value: 'GG' },
-            { label: 'Guinea', value: 'GN' },
-            { label: 'Guinea-Bissau', value: 'GW' },
-            { label: 'Guyana', value: 'GY' },
-            { label: 'Haiti', value: 'HT' },
-            { label: 'Heard Island and Mcdonald Islands', value: 'HM' },
-            { label: 'Holy See (Vatican City State)', value: 'VA' },
-            { label: 'Honduras', value: 'HN' },
-            { label: 'Hong Kong', value: 'HK' },
-            { label: 'Hungary', value: 'HU' },
-            { label: 'Iceland', value: 'IS' },
-            { label: 'India', value: 'IN' },
-            { label: 'Indonesia', value: 'ID' },
-        ])
+        const firstInit = () => {
+            if (!user) {
+                navigate('/login')
+            }
+
+            setListItems([
+                { label: 'Afghanistan', value: 'AF' },
+                { label: 'Åland Islands', value: 'AX' },
+                { label: 'Albania', value: 'AL' },
+                { label: 'Algeria', value: 'DZ' },
+                { label: 'American Samoa', value: 'AS' },
+                { label: 'AndorrA', value: 'AD' },
+                { label: 'Angola', value: 'AO' },
+                { label: 'Anguilla', value: 'AI' },
+                { label: 'Antarctica', value: 'AQ' },
+                { label: 'Antigua and Barbuda', value: 'AG' },
+                { label: 'Argentina', value: 'AR' },
+                { label: 'Armenia', value: 'AM' },
+                { label: 'Aruba', value: 'AW' },
+                { label: 'Australia', value: 'AU' },
+                { label: 'Austria', value: 'AT' },
+                { label: 'Azerbaijan', value: 'AZ' },
+                { label: 'Bahamas', value: 'BS' },
+                { label: 'Bahrain', value: 'BH' },
+                { label: 'Bangladesh', value: 'BD' },
+                { label: 'Barbados', value: 'BB' },
+                { label: 'Belarus', value: 'BY' },
+                { label: 'Belgium', value: 'BE' },
+                { label: 'Belize', value: 'BZ' },
+                { label: 'Benin', value: 'BJ' },
+                { label: 'Bermuda', value: 'BM' },
+                { label: 'Bhutan', value: 'BT' },
+                { label: 'Bolivia', value: 'BO' },
+                { label: 'Bosnia and Herzegovina', value: 'BA' },
+                { label: 'Botswana', value: 'BW' },
+                { label: 'Bouvet Island', value: 'BV' },
+                { label: 'Brazil', value: 'BR' },
+                { label: 'British Indian Ocean Territory', value: 'IO' },
+                { label: 'Brunei Darussalam', value: 'BN' },
+                { label: 'Bulgaria', value: 'BG' },
+                { label: 'Burkina Faso', value: 'BF' },
+                { label: 'Burundi', value: 'BI' },
+                { label: 'Cambodia', value: 'KH' },
+                { label: 'Cameroon', value: 'CM' },
+                { label: 'Canada', value: 'CA' },
+                { label: 'Cape Verde', value: 'CV' },
+                { label: 'Cayman Islands', value: 'KY' },
+                { label: 'Central African Republic', value: 'CF' },
+                { label: 'Chad', value: 'TD' },
+                { label: 'Chile', value: 'CL' },
+                { label: 'China', value: 'CN' },
+                { label: 'Christmas Island', value: 'CX' },
+                { label: 'Cocos (Keeling) Islands', value: 'CC' },
+                { label: 'Colombia', value: 'CO' },
+                { label: 'Comoros', value: 'KM' },
+                { label: 'Congo', value: 'CG' },
+                { label: 'Congo, The Democratic Republic of the', value: 'CD' },
+                { label: 'Cook Islands', value: 'CK' },
+                { label: 'Costa Rica', value: 'CR' },
+                { label: 'Cote D\'Ivoire', value: 'CI' },
+                { label: 'Croatia', value: 'HR' },
+                { label: 'Cuba', value: 'CU' },
+                { label: 'Cyprus', value: 'CY' },
+                { label: 'Czech Republic', value: 'CZ' },
+                { label: 'Denmark', value: 'DK' },
+                { label: 'Djibouti', value: 'DJ' },
+                { label: 'Dominica', value: 'DM' },
+                { label: 'Dominican Republic', value: 'DO' },
+                { label: 'Ecuador', value: 'EC' },
+                { label: 'Egypt', value: 'EG' },
+                { label: 'El Salvador', value: 'SV' },
+                { label: 'Equatorial Guinea', value: 'GQ' },
+                { label: 'Eritrea', value: 'ER' },
+                { label: 'Estonia', value: 'EE' },
+                { label: 'Ethiopia', value: 'ET' },
+                { label: 'Falkland Islands (Malvinas)', value: 'FK' },
+                { label: 'Faroe Islands', value: 'FO' },
+                { label: 'Fiji', value: 'FJ' },
+                { label: 'Finland', value: 'FI' },
+                { label: 'France', value: 'FR' },
+                { label: 'French Guiana', value: 'GF' },
+                { label: 'French Polynesia', value: 'PF' },
+                { label: 'French Southern Territories', value: 'TF' },
+                { label: 'Gabon', value: 'GA' },
+                { label: 'Gambia', value: 'GM' },
+                { label: 'Georgia', value: 'GE' },
+                { label: 'Germany', value: 'DE' },
+                { label: 'Ghana', value: 'GH' },
+                { label: 'Gibraltar', value: 'GI' },
+                { label: 'Greece', value: 'GR' },
+                { label: 'Greenland', value: 'GL' },
+                { label: 'Grenada', value: 'GD' },
+                { label: 'Guadeloupe', value: 'GP' },
+                { label: 'Guam', value: 'GU' },
+                { label: 'Guatemala', value: 'GT' },
+                { label: 'Guernsey', value: 'GG' },
+                { label: 'Guinea', value: 'GN' },
+                { label: 'Guinea-Bissau', value: 'GW' },
+                { label: 'Guyana', value: 'GY' },
+                { label: 'Haiti', value: 'HT' },
+                { label: 'Heard Island and Mcdonald Islands', value: 'HM' },
+                { label: 'Holy See (Vatican City State)', value: 'VA' },
+                { label: 'Honduras', value: 'HN' },
+                { label: 'Hong Kong', value: 'HK' },
+                { label: 'Hungary', value: 'HU' },
+                { label: 'Iceland', value: 'IS' },
+                { label: 'India', value: 'IN' },
+                { label: 'Indonesia', value: 'ID' },
+            ])
+        }
+
+        firstInit()
     }, [])
 
     const handleCheckAll = (checked, setChecked, list) => {
@@ -126,7 +140,7 @@ const PreferencesPage = () => {
     }
 
     const handleChecked = (e, checkedValues, setChecked) => {
-        const {value, checked} = e.target;
+        const { value, checked } = e.target;
         if (checked) {
             setChecked([...checkedValues, value])
         } else {
@@ -159,8 +173,8 @@ const PreferencesPage = () => {
                                     {listItems.length > 0 && (
                                         <div className="mt-5">
                                             <div className="flex items-center gap-2">
-                                                <Checkbox 
-                                                    id={`source-all`} 
+                                                <Checkbox
+                                                    id={`source-all`}
                                                     onChange={(e) => {
                                                         handleCheckAll(e.target.checked, setSelectedSources, listItems)
                                                     }}
@@ -172,9 +186,9 @@ const PreferencesPage = () => {
                                             </div>
                                         </div>
                                     )}
-                                    <div 
-                                        className={`mt-5 ${ listItems.length
-                                            ? 'grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 auto-cols-max gap-2' 
+                                    <div
+                                        className={`mt-5 ${listItems.length
+                                            ? 'grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 auto-cols-max gap-2'
                                             : ''
                                             }`}
                                     >
@@ -182,9 +196,9 @@ const PreferencesPage = () => {
                                             listItems.length ? listItems.map((item, index) => {
                                                 return (
                                                     <div className="flex items-center gap-2" key={index}>
-                                                        <Checkbox 
-                                                            id={`source-${index}`} 
-                                                            value={item.value} 
+                                                        <Checkbox
+                                                            id={`source-${index}`}
+                                                            value={item.value}
                                                             onChange={(e) => {
                                                                 handleChecked(e, selectedSources, setSelectedSources)
                                                             }}
@@ -212,8 +226,8 @@ const PreferencesPage = () => {
                                     {listItems.length > 0 && (
                                         <div className="mt-5">
                                             <div className="flex items-center gap-2">
-                                                <Checkbox 
-                                                    id={`category-all`} 
+                                                <Checkbox
+                                                    id={`category-all`}
                                                     onChange={(e) => {
                                                         handleCheckAll(e.target.checked, setSelectedCategories, listItems)
                                                     }}
@@ -225,9 +239,9 @@ const PreferencesPage = () => {
                                             </div>
                                         </div>
                                     )}
-                                    <div 
-                                        className={`mt-5 ${ listItems.length
-                                            ? 'grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 auto-cols-max gap-2' 
+                                    <div
+                                        className={`mt-5 ${listItems.length
+                                            ? 'grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 auto-cols-max gap-2'
                                             : ''
                                             }`}
                                     >
@@ -235,14 +249,14 @@ const PreferencesPage = () => {
                                             listItems.length ? listItems.map((item, index) => {
                                                 return (
                                                     <div className="flex items-center gap-2" key={index}>
-                                                    <Checkbox 
-                                                        id={`category-${index}`} 
-                                                        value={item.value} 
-                                                        onChange={(e) => {
-                                                            handleChecked(e, selectedCategories, setSelectedCategories)
-                                                        }}
-                                                        checked={selectedCategories.includes(item.value)}
-                                                    />
+                                                        <Checkbox
+                                                            id={`category-${index}`}
+                                                            value={item.value}
+                                                            onChange={(e) => {
+                                                                handleChecked(e, selectedCategories, setSelectedCategories)
+                                                            }}
+                                                            checked={selectedCategories.includes(item.value)}
+                                                        />
                                                         <Label htmlFor={`category-${index}`}>
                                                             {item.label}
                                                         </Label>
@@ -265,8 +279,8 @@ const PreferencesPage = () => {
                                     {listItems.length > 0 && (
                                         <div className="mt-5">
                                             <div className="flex items-center gap-2">
-                                                <Checkbox 
-                                                    id={`author-all`} 
+                                                <Checkbox
+                                                    id={`author-all`}
                                                     onChange={(e) => {
                                                         handleCheckAll(e.target.checked, setSelectedAuthors, listItems)
                                                     }}
@@ -278,9 +292,9 @@ const PreferencesPage = () => {
                                             </div>
                                         </div>
                                     )}
-                                    <div 
-                                        className={`mt-5 ${ listItems.length
-                                            ? 'grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 auto-cols-max gap-2' 
+                                    <div
+                                        className={`mt-5 ${listItems.length
+                                            ? 'grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 auto-cols-max gap-2'
                                             : ''
                                             }`}
                                     >
@@ -288,14 +302,14 @@ const PreferencesPage = () => {
                                             listItems.length ? listItems.map((item, index) => {
                                                 return (
                                                     <div className="flex items-center gap-2" key={index}>
-                                                    <Checkbox 
-                                                        id={`author-${index}`} 
-                                                        value={item.value} 
-                                                        onChange={(e) => {
-                                                            handleChecked(e, selectedAuthors, setSelectedAuthors)
-                                                        }}
-                                                        checked={selectedAuthors.includes(item.value)}
-                                                    />
+                                                        <Checkbox
+                                                            id={`author-${index}`}
+                                                            value={item.value}
+                                                            onChange={(e) => {
+                                                                handleChecked(e, selectedAuthors, setSelectedAuthors)
+                                                            }}
+                                                            checked={selectedAuthors.includes(item.value)}
+                                                        />
                                                         <Label htmlFor={`author-${index}`}>
                                                             {item.label}
                                                         </Label>
