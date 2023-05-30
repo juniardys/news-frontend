@@ -19,10 +19,24 @@ export const authAPI = {
     register: async function (params, cancel = false) {
         try {
             const response = await api.request({
-                url: "/register/",
+                url: "/register",
                 method: "POST",
                 data: params,
                 signal: cancel ? cancelApiObject[this.register.name].handleRequestCancellation().signal : undefined,
+            })
+    
+            return response?.data
+        } catch (error) {
+            throw error
+        }
+    },
+    check: async function (params, cancel = false) {
+        try {
+            const response = await api.request({
+                url: "/user",
+                method: "GET",
+                data: params,
+                signal: cancel ? cancelApiObject[this.check.name].handleRequestCancellation().signal : undefined,
             })
     
             return response?.data

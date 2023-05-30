@@ -18,8 +18,9 @@ const Navbar = () => {
             .finally(() => {
                 dispatch(logOut());
                 dispatch(setLoaderLoading(false))
-                navigate('/');
-                toast.success('Successfully logout!');
+                setTimeout(() => {
+                    window.location.href = '/'
+                }, 500)
             })
     }
 
@@ -32,11 +33,13 @@ const Navbar = () => {
                     className="px-5"
                     placement="bottom"
                 >
-                    <BaseNavbar.Brand href="/">
-                        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-                            News Magazine
-                        </span>
-                    </BaseNavbar.Brand>
+                    <Link to="/">
+                        <BaseNavbar.Brand>
+                            <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+                                News Magazine
+                            </span>
+                        </BaseNavbar.Brand>
+                    </Link>
                     <div className="flex md:order-2">
                         {user?.name ?
                             (
