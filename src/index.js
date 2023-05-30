@@ -18,8 +18,8 @@ root.render(
       <BrowserRouter>
         <App />
         <Loader />
-        <ToastContainer />
       </BrowserRouter>
+      <ToastContainer />
     </Provider>
   </React.StrictMode>
 );

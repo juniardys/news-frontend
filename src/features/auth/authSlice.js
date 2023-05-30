@@ -1,11 +1,26 @@
+import { authAPI } from "@/features/auth/authAPI";
+
 const { createSlice } = require("@reduxjs/toolkit");
 
-const user = localStorage.getItem('user') || null;
-const token = localStorage.getItem('token') || null;
+let user = JSON.parse(localStorage.getItem('user') || null);
+let token = localStorage.getItem('token') || null;
+
+// check user token
+if (token) {
+    try {
+        const response = await authAPI.check()
+        if (response?.success) {
+            user = response?.data
+        }
+    } catch (error) {
+        user = null;
+        token = null;
+    }
+}
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: { user: user && JSON.parse(user), token: token },
+    initialState: { user, token },
     reducers: {
         setCredentials: (state, action) => {
             const { user, token } = action.payload
