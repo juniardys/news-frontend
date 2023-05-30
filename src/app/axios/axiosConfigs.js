@@ -1,5 +1,4 @@
 import axios from "axios"
-import { toast } from "react-toastify"
 
 export const api = axios.create({
     baseURL: `${process.env.REACT_APP_BACKEND_URL}/api/v1`,
@@ -10,7 +9,7 @@ const errorHandler = (error) => {
     const statusCode = error.response?.status
 
     if (error.code === "ERR_CANCELED") {
-        toast.error("API canceled!");
+        console.log('API Canceled!')
         return Promise.resolve()
     }
 

@@ -8,10 +8,10 @@ export const authAPI = {
                 url: `/login`,
                 method: "POST",
                 data: params,
-                signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined,
+                signal: cancel ? cancelApiObject[this.login.name].handleRequestCancellation().signal : undefined,
             })
     
-            return response.data
+            return response?.data
         } catch (error) {
             throw error
         }
@@ -22,10 +22,10 @@ export const authAPI = {
                 url: "/register/",
                 method: "POST",
                 data: params,
-                signal: cancel ? cancelApiObject[this.getPaginated.name].handleRequestCancellation().signal : undefined,
+                signal: cancel ? cancelApiObject[this.register.name].handleRequestCancellation().signal : undefined,
             })
     
-            return response.data
+            return response?.data
         } catch (error) {
             throw error
         }
@@ -35,10 +35,10 @@ export const authAPI = {
             const response = await api.request({
                 url: "/logout",
                 method: "GET",
-                signal: cancel ? cancelApiObject[this.getPaginated.name].handleRequestCancellation().signal : undefined,
+                signal: cancel ? cancelApiObject[this.logout.name].handleRequestCancellation().signal : undefined,
             })
     
-            return response.data
+            return response?.data
         } catch (error) {
             throw error
         }

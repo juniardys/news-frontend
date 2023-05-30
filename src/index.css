@@ -60,3 +60,10 @@ button, input, optgroup, select, textarea {
 .rs-picker-toggle-caret {
     right: 30px !important;
 }
+
+.rs-btn-primary {
+    background-color: #2589f5;
+    background-color: var(--rs-btn-primary-hover-bg);
+    color: #fff;
+    color: var(--rs-btn-primary-text);
+}
