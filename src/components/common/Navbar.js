@@ -31,6 +31,9 @@ const Navbar = () => {
                     rounded={true}
                     className="px-5"
                     placement="bottom"
+                    theme={{
+                        base: 'border-gray-200 bg-white px-2 py-2.5 dark:border-gray-700 dark:bg-gray-800 sm:px-4',
+                    }}
                 >
                     <BaseNavbar.Brand href="/">
                         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
