@@ -3,11 +3,17 @@
 FROM node:20-alpine3.16 as build
 # Set working directory
 WORKDIR /app
-# Copy the entire project
-COPY . .
+# Copy package.json and package-lock.json
+COPY package.json .
 # Install dependencies
 RUN npm install
-# Expose
-EXPOSE 3000
-# Start react app
-CMD ["npm", "start"]
+# Copy the entire project
+COPY . .
+# Build the React app
+RUN npm run build
+
+## Stage 2
+# Base image
+FROM nginx:1.25.0
+# Copy build file to nginx
+COPY --from=build /app/build /var/www/html
