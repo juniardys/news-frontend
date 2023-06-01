@@ -1,6 +1,9 @@
 # News Frontend
 Frontend app of News Magazine project
 
+# Postman
+https://elements.getpostman.com/redirect?entityId=16563585-5fe3595a-8142-4d63-ac76-a1223d3691b4&entityType=collection
+
 # How to run
 
 ## Production
