@@ -3,17 +3,11 @@
 FROM node:20-alpine3.16 as build
 # Set working directory
 WORKDIR /app
-# Copy package.json and package-lock.json
-COPY package.json .
-# Install dependencies
-RUN npm install
 # Copy the entire project
 COPY . .
-# Build the React app
-RUN npm run build
-
-## Stage 2
-# Base image
-FROM nginx:1.25.0
-# Copy build file to nginx
-COPY --from=build /app/build /var/www/html
+# Install dependencies
+RUN npm install
+# Setup Environment
+ENV NODE_ENV=production
+# Serve
+CMD [ "npm", "start" ]
