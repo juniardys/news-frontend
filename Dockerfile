@@ -7,7 +7,5 @@ WORKDIR /app
 COPY . .
 # Install dependencies
 RUN npm install
-# Setup Environment
-ENV NODE_ENV=production
 # Serve
 CMD [ "npm", "start" ]
