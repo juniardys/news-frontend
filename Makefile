@@ -8,15 +8,15 @@ stop:
 	docker-compose stop
 
 restart:
-	make stop
-	make start
+	docker-compose stop
+	docker-compose up -d
 
 build:
 	docker-compose up -d --build
 
 rebuild:
-	make down
-	make build
+	docker-compose down
+	docker-compose up -d --build
 
 down:
 	docker-compose down
