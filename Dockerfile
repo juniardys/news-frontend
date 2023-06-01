@@ -7,11 +7,14 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
-
 # Copy the entire project
 COPY . .
+
+# Remove node_modules
+RUN rm -rf node_modules
+
+# Install dependencies
+RUN npm install
 
 # Start the application
 CMD ["npm", "start"]
