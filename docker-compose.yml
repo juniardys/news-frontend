@@ -3,10 +3,7 @@ version: "3.8"
 services:
   app:
     container_name: 'news-frontend-app'
-    build:
-      context: .
-      args:
-        - REACT_APP_BACKEND_URL=http://localhost:8080
+    build: .
     ports:
       - "3000:3000"
     volumes:

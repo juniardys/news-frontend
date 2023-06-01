@@ -7,9 +7,7 @@ WORKDIR /app
 COPY . .
 # Install dependencies
 RUN npm install
-# Set environment variables
-ARG REACT_APP_BACKEND_URL
-ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
-ENV NODE_ENV=production
+# Expose
+EXPOSE 3000
 # Start react app
 CMD ["npm", "start"]
