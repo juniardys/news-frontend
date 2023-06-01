@@ -6,6 +6,4 @@ Dockerfile
 .dockerignore
 .git
 .gitignore
-.env
-.docker
 .DS_Store
