@@ -10,6 +10,7 @@ https://elements.getpostman.com/redirect?entityId=16563585-5fe3595a-8142-4d63-ac
 ### Dependencies
 Install all dependecies below:
 - [docker](https://www.docker.com)
+- makefile ([Windows](https://linuxhint.com/run-makefile-windows)) ([Linux](https://linuxhint.com/install-make-ubuntu/)) ([MacOS](https://formulae.brew.sh/formula/make))
 ### First setup and start
 Run the following command
 ```
