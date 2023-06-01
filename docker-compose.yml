@@ -8,9 +8,9 @@ services:
       args:
         - REACT_APP_BACKEND_URL=http://localhost:8080
     ports:
-      - "3000:80"
+      - "3000:3000"
     volumes:
-      - ./.docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./.env.docker:/app/.env
     networks:
       - news
 
