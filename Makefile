@@ -1,5 +1,5 @@
 init-start:
-	make start
+	docker-compose up -d --build
 
 start:
 	docker-compose up -d
